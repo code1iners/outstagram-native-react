@@ -1,7 +1,7 @@
 import AppLoading from "expo-app-loading";
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { AppearanceProvider } from "react-native-appearance";
+import { Appearance, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as Font from "expo-font";
 import { Asset } from "expo-asset";
@@ -18,7 +18,6 @@ export default function App() {
     const imagePromises = imagesToLoad.map((image) => Asset.loadAsync(image));
     return Promise.all([...fontPromises, ...imagePromises]);
   };
-  console.log(loading);
   if (loading) {
     return (
       <AppLoading
@@ -28,6 +27,14 @@ export default function App() {
       />
     );
   }
+
+  /**
+   * ### 시스템 라이트/다크 모드 감지 구독.
+   * - Expected colorScheme : light or dark
+   */
+  const subscription = Appearance.addChangeListener(({ colorScheme }) => {
+    console.log(colorScheme);
+  });
 
   return (
     <NavigationContainer>
