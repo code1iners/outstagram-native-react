@@ -29,11 +29,12 @@ export default function App() {
   }
 
   /**
-   * ### 시스템 라이트/다크 모드 감지 구독.
+   * ### 시스템 디스플레이 라이트/다크 모드 감지 구독.
    * - Expected colorScheme : light or dark
    */
   const subscription = Appearance.addChangeListener(({ colorScheme }) => {
-    console.log(colorScheme);
+    // 현재 시스템 디스플레이 모드 출력.
+    // console.log(colorScheme);
   });
 
   return (
