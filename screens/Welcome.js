@@ -19,30 +19,38 @@ const Logo = styled.Image`
 `;
 
 const ButtonsWrapper = styled.View`
+  width: 100%;
   margin-top: 50px;
   align-items: center;
 `;
 
 // sign up start
-const SignUpWrapper = styled.View`
+const SignUpWrapper = styled.TouchableOpacity`
+  width: 80%;
   background-color: ${colors.blue};
   border-radius: 5px;
-  padding: 5px 10px;
+  padding: 10px 10px;
 `;
 const SignUpText = styled.Text`
   color: white;
   font-weight: 600;
   font-size: 20px;
   letter-spacing: 1.5px;
+  text-align: center;
 `;
 // sign up end
 
 // sign in start
+const SignInWrapper = styled.TouchableOpacity`
+  margin-top: 10px;
+`;
+
 const SignInLink = styled.Text`
   margin-top: 15px;
   color: ${colors.blue};
   font-weight: 600;
   font-size: 20px;
+  letter-spacing: 1.5px;
 `;
 // sign in end
 
@@ -61,16 +69,14 @@ export default function Welcome({ navigation }) {
       {/* buttons */}
       <ButtonsWrapper>
         {/* sign up */}
-        <TouchableOpacity onPress={navigateToSignUp}>
-          <SignUpWrapper>
-            <SignUpText>Create Account</SignUpText>
-          </SignUpWrapper>
-        </TouchableOpacity>
+        <SignUpWrapper onPress={navigateToSignUp}>
+          <SignUpText>Create Account</SignUpText>
+        </SignUpWrapper>
 
         {/* sign in */}
-        <TouchableOpacity onPress={navigateToSignIn}>
+        <SignInWrapper onPress={navigateToSignIn}>
           <SignInLink>Sign In</SignInLink>
-        </TouchableOpacity>
+        </SignInWrapper>
       </ButtonsWrapper>
     </Container>
   );
