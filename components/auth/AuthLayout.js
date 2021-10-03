@@ -5,7 +5,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import styled from "styled-components/native";
-import { isIos } from "../../utils/platform";
+import { isIos, isWeb } from "../../utils/platform";
 
 const Container = styled.View`
   flex: 1;
@@ -26,7 +26,7 @@ const AuthLayout = ({ children }) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={dismissKeyboard}>
+    <TouchableWithoutFeedback onPress={dismissKeyboard} disabled={isWeb}>
       <Container>
         <KeyboardAvoidingView
           style={{

@@ -1,28 +1,35 @@
-import React, { useRef } from "react";
-import { KeyboardAvoidingView } from "react-native";
+import React, { useEffect, useRef } from "react";
+import { useForm } from "react-hook-form";
 import styled from "styled-components/native";
 import { colors } from "../colors";
 import AuthLayout from "../components/auth/AuthLayout";
 import ContainedButton from "../components/shared/ContainedButton";
 import { TextInput } from "../components/shared/styles";
-import { isIos } from "../utils/platform";
 
 const FormWrapper = styled.View`
   width: 90%;
 `;
 
 export default function SignUp() {
+  // Hooks.
+  const { register, handleSubmit, setValue } = useForm();
+  useEffect(() => {
+    register("firstName");
+    register("lastName");
+    register("username");
+    register("email");
+    register("password");
+  }, [register]);
+
   // Refs.
   const lastNameRef = useRef();
   const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+
   // Handlers.
   const onNext = (nextRef) => nextRef?.current?.focus();
-  const onDone = () => {
-    alert("hello");
-  };
-  const createNewAccount = () => {};
+  const onValid = ({ firstName, lastName, username, email, password }) => {};
 
   return (
     <AuthLayout>
@@ -35,6 +42,7 @@ export default function SignUp() {
           onSubmitEditing={() => onNext(lastNameRef)}
           blurOnSubmit={false}
           placeholderTextColor={colors.inputPlaceholder}
+          onChangeText={(text) => setValue("firstName", text)}
         />
         <TextInput
           ref={lastNameRef}
@@ -44,6 +52,7 @@ export default function SignUp() {
           onSubmitEditing={() => onNext(usernameRef)}
           blurOnSubmit={false}
           placeholderTextColor={colors.inputPlaceholder}
+          onChangeText={(text) => setValue("lastName", text)}
         />
         <TextInput
           ref={usernameRef}
@@ -53,6 +62,8 @@ export default function SignUp() {
           onSubmitEditing={() => onNext(emailRef)}
           blurOnSubmit={false}
           placeholderTextColor={colors.inputPlaceholder}
+          autoCapitalize="none"
+          onChangeText={(text) => setValue("username", text)}
         />
         <TextInput
           ref={emailRef}
@@ -63,6 +74,8 @@ export default function SignUp() {
           onSubmitEditing={() => onNext(passwordRef)}
           blurOnSubmit={false}
           placeholderTextColor={colors.inputPlaceholder}
+          autoCapitalize="none"
+          onChangeText={(text) => setValue("email", text)}
         />
         <TextInput
           ref={passwordRef}
@@ -70,16 +83,17 @@ export default function SignUp() {
           placeholderTextColor="gray"
           secureTextEntry
           returnKeyType="done"
-          onSubmitEditing={onDone}
+          onSubmitEditing={handleSubmit(onValid)}
           placeholderTextColor={colors.inputPlaceholder}
           lastOne={true}
+          onChangeText={(text) => setValue("password", text)}
         />
 
         <ContainedButton
           text="Create Account"
           isFullWidth={true}
           disabled={false}
-          onPress={createNewAccount}
+          onPress={handleSubmit(onValid)}
         />
       </FormWrapper>
     </AuthLayout>
