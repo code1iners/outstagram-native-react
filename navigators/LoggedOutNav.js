@@ -13,7 +13,14 @@ const Stack = createStackNavigator();
 
 export default function LoggedOutNav() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerBackTitleVisible: false,
+        headerTitle: "",
+        headerTransparent: true,
+        headerTintColor: "white",
+      }}
+    >
       <Stack.Screen
         name={COMPONENT_WELCOME}
         options={{
