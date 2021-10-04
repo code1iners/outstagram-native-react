@@ -27,6 +27,7 @@ const TextButton = ({
       disabled={disabled}
       onPress={onPress}
       isFullWidth={isFullWidth}
+      loading={false}
     >
       <Button>{text}</Button>
     </ButtonWrapper>

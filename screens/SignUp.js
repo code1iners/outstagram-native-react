@@ -14,11 +14,21 @@ export default function SignUp() {
   // Hooks.
   const { register, handleSubmit, setValue } = useForm();
   useEffect(() => {
-    register("firstName");
-    register("lastName");
-    register("username");
-    register("email");
-    register("password");
+    register("firstName", {
+      required: true,
+    });
+    register("lastName", {
+      required: true,
+    });
+    register("username", {
+      required: true,
+    });
+    register("email", {
+      required: true,
+    });
+    register("password", {
+      required: true,
+    });
   }, [register]);
 
   // Refs.
@@ -29,7 +39,9 @@ export default function SignUp() {
 
   // Handlers.
   const onNext = (nextRef) => nextRef?.current?.focus();
-  const onValid = ({ firstName, lastName, username, email, password }) => {};
+  const onValid = ({ firstName, lastName, username, email, password }) => {
+    console.log(firstName, lastName, username, email, password);
+  };
 
   return (
     <AuthLayout>
@@ -94,6 +106,7 @@ export default function SignUp() {
           isFullWidth={true}
           disabled={false}
           onPress={handleSubmit(onValid)}
+          loading={true}
         />
       </FormWrapper>
     </AuthLayout>

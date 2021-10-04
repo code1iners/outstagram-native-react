@@ -15,8 +15,12 @@ export default function SignIn({ navigation }) {
   const { register, handleSubmit, setValue } = useForm();
   useEffect(() => {
     // Regist react hook form when Mounted.
-    register("username");
-    register("password");
+    register("username", {
+      required: true,
+    });
+    register("password", {
+      required: true,
+    });
   }, [register]);
 
   // Refs.

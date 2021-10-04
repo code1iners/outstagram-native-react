@@ -1,4 +1,5 @@
 import React from "react";
+import { ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
 import { colors } from "../../colors";
 
@@ -21,6 +22,7 @@ const ContainedButton = ({
   text,
   disabled = false,
   isFullWidth = false,
+  loading = false,
   onPress,
 }) => {
   return (
@@ -29,7 +31,11 @@ const ContainedButton = ({
       onPress={onPress}
       isFullWidth={isFullWidth}
     >
-      <Button>{text ? text : "Button"}</Button>
+      {loading ? (
+        <ActivityIndicator color="white" />
+      ) : (
+        <Button>{text ? text : "Button"}</Button>
+      )}
     </ButtonWrapper>
   );
 };
